@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wisk — Création d'interfaces Roblox</title>
+  <meta name="description" content="Wisk conçoit des interfaces Roblox modernes, fluides et optimisées pour vos jeux.">
+  <style>
+    :root{
+      --bg:#f6f7ff;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --accent:#5A65E9;
+      --accent-light:#8189F6;
+    }
+    [data-theme="dark"]{
+      --bg:#0b0f26;
+      --card:#131a40;
+      --text:#e6e9ff;
+      --muted:#9aa5ff;
+      --accent:#8189F6;
+      --accent-light:#5A65E9;
+    }
+
+    *{box-sizing:border-box;transition:all .25s ease;}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,Arial;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .container{max-width:1100px;margin:32px auto;padding:0 20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:50px;height:50px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-weight:700;font-size:18px;
+      box-shadow:0 4px 10px rgba(90,101,233,0.4);
+    }
+    nav a{
+      margin-left:18px;color:var(--muted);
+      text-decoration:none;font-weight:500;
+    }
+    nav a:hover{color:var(--accent);}
+    #themeBtn{
+      margin-left:14px;
+      padding:6px 10px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+    }
+    #themeBtn:hover{color:var(--accent);border-color:var(--accent-light);}
+
+    /* HERO */
+    .hero{
+      text-align:center;
+      margin-top:60px;
+      padding:60px 0;
+    }
+    .hero h1{
+      font-size:42px;
+      margin-bottom:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .hero p{color:var(--muted);max-width:640px;margin:0 auto 20px}
+    .cta{
+      display:inline-block;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      color:white;
+      padding:12px 20px;
+      border-radius:10px;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow:0 6px 15px rgba(90,101,233,0.4);
+    }
+    .cta:hover{opacity:0.85;}
+
+    h2{text-align:center;margin-top:60px;font-size:28px;}
+    .underline{
+      width:60px;height:4px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      border-radius:4px;
+      margin:8px auto 20px;
+    }
+
+    .about,.method{
+      background:var(--card);
+      padding:30px;
+      border-radius:14px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.05);
+      max-width:900px;margin:0 auto;
+      animation:fadeInUp .8s ease both;
+    }
+
+    /* SERVICES */
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;margin-top:20px;
+    }
+    .service{
+      background:var(--card);
+      padding:20px;border-radius:12px;
+      text-align:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.05);
+      transition:transform .2s;
+    }
+    .service:hover{transform:translateY(-5px);}
+    .service strong{display:block;margin-bottom:8px;font-size:17px;}
+
+    /* PORTFOLIO */
+    .portfolio{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;margin-top:20px;
+    }
+    .thumb{
+      height:160px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent-light),var(--accent));
+      color:white;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:600;font-size:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      transition:transform .2s;
+    }
+    .thumb:hover{transform:scale(1.03);}
+
+    footer{
+      margin-top:60px;padding:24px 0;text-align:center;
+      color:var(--muted);
+      background:rgba(0,0,0,0.02);
+    }
+    footer a{
+      color:var(--accent);
+      text-decoration:none;
+      margin:0 8px;
+    }
+    footer a:hover{opacity:0.8;}
+
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    @media(max-width:880px){
+      .hero h1{font-size:32px;}
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="Logo.png" alt="Logo Wisk" class="logo">
+        <div>
+          <strong>Wisk</strong>
+          <div style="font-size:13px;color:var(--muted)">Création de GUI Roblox</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#method">Méthode</a>
+        <a href="#portfolio">Portfolio</a>
+        <button id="themeBtn">Mode</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Des interfaces Roblox uniques et professionnelles</h1>
+      <p>Nous concevons des interfaces utilisateur immersives, modernes et parfaitement intégrées à vos projets Roblox.</p>
+      <a href="#portfolio" class="cta">Découvrir notre travail</a>
+    </section>
+
+    <section id="about">
+      <h2>À propos</h2>
+      <div class="underline"></div>
+      <div class="about">
+        <p>Nous sommes <strong>Wisk</strong>, une équipe passionnée par la création d’interfaces Roblox.  
+        Notre objectif est simple : transformer vos idées en expériences visuelles claires, dynamiques et performantes.  
+        Nous accordons une grande importance à la fluidité, la lisibilité et la modernité de chaque interface.</p>
+        <p>Du simple panneau d’administration aux systèmes HUD complexes, nous adaptons chaque design à votre univers, en veillant à la cohérence et à la qualité du résultat final.</p>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Nos Services</h2>
+      <div class="underline"></div>
+      <div class="services">
+        <div class="service"><strong>Design UI/UX</strong>Interfaces harmonieuses et intuitives, pensées pour le confort du joueur.</div>
+        <div class="service"><strong>Scripts Interactifs</strong>GUIs fonctionnels, connectés à vos systèmes Roblox.</div>
+        <div class="service"><strong>Animations Fluides</strong>Transitions et effets visuels immersifs pour plus de vie.</div>
+        <div class="service"><strong>Optimisation</strong>Des interfaces légères et stables, même dans les grands jeux.</div>
+      </div>
+    </section>
+
+    <section id="method">
+      <h2>Notre Méthode</h2>
+      <div class="underline"></div>
+      <div class="method">
+        <p><strong>1. Discussion :</strong> nous échangeons avec vous pour comprendre vos besoins et votre style.</p>
+        <p><strong>2. Conception :</strong> nous réalisons une maquette visuelle, validée avant intégration dans Roblox Studio.</p>
+        <p><strong>3. Développement :</strong> chaque interface est codée et animée avec soin, pour un rendu fluide et réactif.</p>
+        <p><strong>4. Livraison :</strong> nous vous accompagnons jusqu’à la mise en place finale de l’interface dans votre jeu.</p>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <h2>Portfolio</h2>
+      <div class="underline"></div>
+      <div class="portfolio">
+        <div class="thumb">Admin Panel</div>
+        <div class="thumb">Car GUI</div>
+        <div class="thumb">Menu Principal</div>
+        <div class="thumb">HUD Gameplay</div>
+      </div>
+    </section>
+
+    <footer>
+      <small>&copy; <span id="year"></span> Wisk — Fait avec 💖</small><br>
+      <a href="#">Discord</a>•<a href="#">GitHub</a>•<a href="#">Portfolio</a>
+    </footer>
+  </div>
+
+  <script>
+    const themeBtn = document.getElementById('themeBtn');
+    const yearSpan = document.getElementById('year');
+    yearSpan.textContent = new Date().getFullYear();
+
+    function applyTheme(t){
+      document.body.setAttribute('data-theme', t);
+      localStorage.setItem('site_theme', t);
+      themeBtn.textContent = t === 'light' ? '🌙 Mode sombre' : '☀️ Mode clair';
+    }
+    themeBtn.addEventListener('click', ()=>{
+      const next = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+    });
+    applyTheme(localStorage.getItem('site_theme') || 'light');
+  </script>
+</body>
+</html>
