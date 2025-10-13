@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wisk — Création d'interfaces Roblox</title>
   <meta name="description" content="Wisk conçoit des interfaces Roblox modernes, fluides et optimisées pour vos jeux.">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
   <style>
     :root{
       --bg:#f6f7ff;
@@ -13,6 +20,8 @@
       --muted:#475569;
       --accent:#5A65E9;
       --accent-light:#8189F6;
+      --transition:.3s ease;
+      --cursor-size:20px;
     }
     [data-theme="dark"]{
       --bg:#0b0f26;
@@ -23,17 +32,36 @@
       --accent-light:#5A65E9;
     }
 
-    *{box-sizing:border-box;transition:all .25s ease;}
+    *{box-sizing:border-box;transition:all var(--transition);}
     body{
       margin:0;
       font-family:"Inter",system-ui,Arial;
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
+      scroll-behavior:smooth;
+      overflow-x:hidden;
+      cursor:none;
     }
 
-    .container{max-width:1100px;margin:32px auto;padding:0 20px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    /* Custom cursor */
+    .cursor{
+      width:var(--cursor-size);
+      height:var(--cursor-size);
+      border-radius:50%;
+      background:var(--accent);
+      position:fixed;
+      pointer-events:none;
+      transform:translate(-50%,-50%);
+      mix-blend-mode: difference;
+      transition: transform .1s ease, background .2s ease;
+      z-index:9999;
+    }
+
+    .container{max-width:1100px;margin:32px auto;padding:0 20px;position:relative;z-index:1;}
+
+    /* HEADER */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:relative;z-index:2;}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:50px;height:50px;border-radius:12px;
@@ -41,11 +69,17 @@
       display:flex;align-items:center;justify-content:center;
       color:white;font-weight:700;font-size:18px;
       box-shadow:0 4px 10px rgba(90,101,233,0.4);
+      cursor:pointer;
     }
     nav a{
       margin-left:18px;color:var(--muted);
       text-decoration:none;font-weight:500;
+      position:relative;
     }
+    nav a::after{
+      content:"";position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s;
+    }
+    nav a:hover::after{width:100%;}
     nav a:hover{color:var(--accent);}
     #themeBtn{
       margin-left:14px;
@@ -63,28 +97,38 @@
       text-align:center;
       margin-top:60px;
       padding:60px 0;
+      position:relative;
+      z-index:1;
     }
     .hero h1{
-      font-size:42px;
+      font-size:48px;
       margin-bottom:14px;
+      font-family:"Poppins",sans-serif;
       background:linear-gradient(135deg,var(--accent),var(--accent-light));
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
     }
-    .hero p{color:var(--muted);max-width:640px;margin:0 auto 20px}
+    .hero p{color:var(--muted);max-width:640px;margin:0 auto 20px; font-size:18px;}
     .cta{
       display:inline-block;
       background:linear-gradient(135deg,var(--accent),var(--accent-light));
       color:white;
-      padding:12px 20px;
-      border-radius:10px;
+      padding:14px 26px;
+      border-radius:12px;
       font-weight:600;
       text-decoration:none;
-      box-shadow:0 6px 15px rgba(90,101,233,0.4);
+      box-shadow:0 8px 20px rgba(90,101,233,0.4);
+      animation: pulse 2s infinite;
+      transition:all .25s ease;
     }
-    .cta:hover{opacity:0.85;}
+    .cta:hover{opacity:0.85; transform:scale(1.05);}
 
-    h2{text-align:center;margin-top:60px;font-size:28px;}
+    @keyframes pulse{
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.05);}
+    }
+
+    h2{text-align:center;margin-top:60px;font-size:32px; font-family:"Poppins",sans-serif;}
     .underline{
       width:60px;height:4px;
       background:linear-gradient(135deg,var(--accent),var(--accent-light));
@@ -94,9 +138,9 @@
 
     .about,.method{
       background:var(--card);
-      padding:30px;
-      border-radius:14px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.05);
+      padding:40px;
+      border-radius:16px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.05);
       max-width:900px;margin:0 auto;
       animation:fadeInUp .8s ease both;
     }
@@ -105,59 +149,109 @@
     .services{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:18px;margin-top:20px;
+      gap:24px;margin-top:30px;
     }
     .service{
       background:var(--card);
-      padding:20px;border-radius:12px;
+      padding:24px;border-radius:16px;
       text-align:center;
-      box-shadow:0 6px 18px rgba(0,0,0,0.05);
-      transition:transform .2s;
+      box-shadow:0 8px 25px rgba(0,0,0,0.05);
+      transition:transform .3s, box-shadow .3s;
+      cursor:pointer;
     }
-    .service:hover{transform:translateY(-5px);}
-    .service strong{display:block;margin-bottom:8px;font-size:17px;}
+    .service:hover{transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15);}
+    .service strong{display:block;margin-bottom:10px;font-size:18px;}
 
     /* PORTFOLIO */
     .portfolio{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:18px;margin-top:20px;
+      gap:24px;margin-top:30px;
     }
     .thumb{
-      height:160px;
-      border-radius:12px;
+      height:180px;
+      border-radius:16px;
       background:linear-gradient(135deg,var(--accent-light),var(--accent));
       color:white;
       display:flex;align-items:center;justify-content:center;
-      font-weight:600;font-size:16px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.08);
-      transition:transform .2s;
+      font-weight:600;font-size:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.08);
+      transition:transform .3s, box-shadow .3s;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
     }
-    .thumb:hover{transform:scale(1.03);}
+    .thumb:hover{
+      transform:scale(1.05);
+      box-shadow:0 12px 30px rgba(0,0,0,0.2);
+    }
+    .thumb::after{
+      content:"Voir projet";
+      position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+      background:rgba(0,0,0,0.5);padding:6px 12px;border-radius:8px;opacity:0;
+      transition:opacity .3s;
+    }
+    .thumb:hover::after{opacity:1;}
 
+    /* LIGHTBOX */
+    .lightbox{
+      display:none;
+      position:fixed;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.8);
+      align-items:center;justify-content:center;
+      z-index:10000;
+    }
+    .lightbox img{
+      max-width:90%;
+      max-height:80%;
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* FOOTER */
     footer{
-      margin-top:60px;padding:24px 0;text-align:center;
+      margin-top:60px;padding:30px 0;text-align:center;
       color:var(--muted);
       background:rgba(0,0,0,0.02);
+      position:relative; z-index:1;
     }
     footer a{
       color:var(--accent);
       text-decoration:none;
       margin:0 8px;
+      transition:opacity .3s;
     }
     footer a:hover{opacity:0.8;}
 
+    /* ANIMATIONS */
     @keyframes fadeInUp{
       from{opacity:0;transform:translateY(20px);}
       to{opacity:1;transform:translateY(0);}
     }
 
+    /* RESPONSIVE */
     @media(max-width:880px){
-      .hero h1{font-size:32px;}
+      .hero h1{font-size:36px;}
     }
+    @media(max-width:600px){
+      header{flex-direction:column; align-items:flex-start;}
+      nav{margin-top:12px;}
+      .cta{width:100%; text-align:center;}
+    }
+
+    /* PARTICLES CONTAINER */
+    #particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;}
   </style>
 </head>
 <body data-theme="light">
+
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+
   <div class="container">
     <header>
       <div class="brand">
@@ -172,7 +266,7 @@
         <a href="#services">Services</a>
         <a href="#method">Méthode</a>
         <a href="#portfolio">Portfolio</a>
-        <button id="themeBtn">Mode</button>
+        <button id="themeBtn">🌙 Mode sombre</button>
       </nav>
     </header>
 
@@ -208,6 +302,7 @@
       <h2>Notre Méthode</h2>
       <div class="underline"></div>
       <div class="method">
+        <h1><strong>PAS MIS EN PLACE</strong></h1>
         <p><strong>1. Discussion :</strong> nous échangeons avec vous pour comprendre vos besoins et votre style.</p>
         <p><strong>2. Conception :</strong> nous réalisons une maquette visuelle, validée avant intégration dans Roblox Studio.</p>
         <p><strong>3. Développement :</strong> chaque interface est codée et animée avec soin, pour un rendu fluide et réactif.</p>
@@ -219,19 +314,25 @@
       <h2>Portfolio</h2>
       <div class="underline"></div>
       <div class="portfolio">
-        <div class="thumb">Admin Panel</div>
-        <div class="thumb">Car GUI</div>
-        <div class="thumb">Menu Principal</div>
-        <div class="thumb">HUD Gameplay</div>
+        <div class="thumb" data-img="https://via.placeholder.com/800x500?text=Admin+Panel">Admin Panel</div>
+        <div class="thumb" data-img="https://via.placeholder.com/800x500?text=Car+GUI">Car GUI</div>
+        <div class="thumb" data-img="https://via.placeholder.com/800x500?text=Menu+Principal">Menu Principal</div>
+        <div class="thumb" data-img="https://via.placeholder.com/800x500?text=HUD+Gameplay">HUD Gameplay</div>
       </div>
     </section>
 
     <footer>
       <small>&copy; <span id="year"></span> Wisk — Fait avec 💖</small><br>
       <a href="https://discord.gg/Hx8WXjaNCj" target="_blank">Rejoindre notre Discord</a>
+      <a href="https://github.com/SplahsurYT/Wisk.github.io" target="_blank">Github</a>
     </footer>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox"><img src="" alt="Project"></div>
 
   <script>
+    // Theme toggle
     const themeBtn = document.getElementById('themeBtn');
     const yearSpan = document.getElementById('year');
     yearSpan.textContent = new Date().getFullYear();
@@ -241,11 +342,48 @@
       localStorage.setItem('site_theme', t);
       themeBtn.textContent = t === 'light' ? '🌙 Mode sombre' : '☀️ Mode clair';
     }
+
     themeBtn.addEventListener('click', ()=>{
       const next = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       applyTheme(next);
     });
-    applyTheme(localStorage.getItem('site_theme') || 'light');
+
+    const userPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    applyTheme(localStorage.getItem('site_theme') || userPref);
+
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e=>{
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // Lightbox
+    const thumbs = document.querySelectorAll('.thumb');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    thumbs.forEach(t=>{
+      t.addEventListener('click', ()=>{
+        lightbox.style.display='flex';
+        lightboxImg.src = t.dataset.img;
+      });
+    });
+    lightbox.addEventListener('click', ()=>{lightbox.style.display='none';});
+
+    // Particles.js
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
+        "color": {"value": "#5A65E9"},
+        "shape": {"type": "circle"},
+        "opacity": {"value": 0.5, "random": true},
+        "size": {"value": 3, "random": true},
+        "line_linked": {"enable": true,"distance": 150,"color": "#5A65E9","opacity": 0.4,"width": 1},
+        "move": {"enable": true,"speed": 2,"direction": "none","random": false,"straight": false,"out_mode": "out"}
+      },
+      "interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": true,"mode": "grab"}},"modes": {"grab": {"distance": 140,"line_linked": {"opacity": 0.5}}}}
+    });
   </script>
 </body>
 </html>
