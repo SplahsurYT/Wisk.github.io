@@ -136,80 +136,30 @@
       margin:8px auto 20px;
     }
 
-    .about,.method{
+    .section-container{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      margin-top:20px;
+    }
+
+    .discord-widget, .description{
+      flex:1 1 350px;
+      min-width:300px;
+      max-width:450px;
       background:var(--card);
-      padding:40px;
-      border-radius:16px;
+      padding:20px;
+      border-radius:12px;
       box-shadow:0 8px 25px rgba(0,0,0,0.05);
-      max-width:900px;margin:0 auto;
-      animation:fadeInUp .8s ease both;
     }
 
-    /* SERVICES */
-    .services{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:24px;margin-top:30px;
-    }
-    .service{
-      background:var(--card);
-      padding:24px;border-radius:16px;
-      text-align:center;
-      box-shadow:0 8px 25px rgba(0,0,0,0.05);
-      transition:transform .3s, box-shadow .3s;
-      cursor:pointer;
-    }
-    .service:hover{transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15);}
-    .service strong{display:block;margin-bottom:10px;font-size:18px;}
-
-    /* PORTFOLIO */
-    .portfolio{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:24px;margin-top:30px;
-    }
-    .thumb{
-      height:180px;
-      border-radius:16px;
-      background:linear-gradient(135deg,var(--accent-light),var(--accent));
-      color:white;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:600;font-size:18px;
-      box-shadow:0 8px 25px rgba(0,0,0,0.08);
-      transition:transform .3s, box-shadow .3s;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-    }
-    .thumb:hover{
-      transform:scale(1.05);
-      box-shadow:0 12px 30px rgba(0,0,0,0.2);
-    }
-    .thumb::after{
-      content:"Voir projet";
-      position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
-      background:rgba(0,0,0,0.5);padding:6px 12px;border-radius:8px;opacity:0;
-      transition:opacity .3s;
-    }
-    .thumb:hover::after{opacity:1;}
-
-    /* LIGHTBOX */
-    .lightbox{
-      display:none;
-      position:fixed;
-      top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.8);
-      align-items:center;justify-content:center;
-      z-index:10000;
-    }
-    .lightbox img{
-      max-width:90%;
-      max-height:80%;
-      border-radius:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    .discord-widget iframe{
+      width:100%;
+      height:500px;
+      border-radius:12px;
     }
 
-    /* FOOTER */
     footer{
       margin-top:60px;padding:30px 0;text-align:center;
       color:var(--muted);
@@ -262,18 +212,19 @@
         </div>
       </div>
       <nav>
-        <a href="#Site-28">Site-28</a>
+        <a href="index.html">Menu</a>        
+        <a href="#site-28">Site-28</a>
+        <a href="#course-formule-simulateur">Course de Formule [Simulateur]</a>
         <button id="themeBtn">🌙 Mode sombre</button>
       </nav>
     </header>
 
-
+    <!-- SITE-28 -->
     <section id="site-28">
       <h2>Site-28</h2>
       <div class="underline"></div>
 
-      <div class="site-28-container">
-        <!-- iframe discord -->
+      <div class="section-container">
         <div class="discord-widget">
           <h3>Serveur Discord Officiel</h3>
           <iframe
@@ -286,26 +237,40 @@
           </iframe>
         </div>
 
-        <div class="site-28-description">
+        <div class="description">
           <h3>À propos de Site-28</h3>
-          <p>
-            <strong>Site-28</strong> est un jeu inspiré de l’univers de la <strong>SCP Foundation</strong>, développé sur 
-            <strong>Roblox</strong> par une petite équipe de passionnés.  
-            Chaque jour, de nouvelles fonctionnalités, salles et scénarios sont ajoutés pour offrir une expérience immersive et fidèle à l’esprit des installations SCP.
-          </p>
-          <p>
-            Le serveur Discord te permet de discuter avec la communauté, de proposer des idées, de signaler des bugs et 
-            de suivre les mises à jour en direct. Tu peux également y obtenir un rôle de testeur ou participer aux 
-            événements spéciaux organisés chaque mois.
-          </p>
-          <p>
-            <strong>⚠️ Attention :</strong> Site-28 n’appartient pas à <em>Wisk</em>.  
-            C’est un projet indépendant créé par une équipe motivée, qui s’améliore de jour en jour grâce au soutien de sa communauté.
-          </p>
+          <p><strong>Site-28</strong> est un jeu inspiré de la <strong>SCP Foundation</strong>, développé sur <strong>Roblox</strong> par une petite équipe de passionnés.</p>
+          <p>Le serveur Discord te permet de discuter avec la communauté, proposer des idées, signaler des bugs et suivre les mises à jour.</p>
+          <p><strong>⚠️ Attention :</strong> Site-28 n’appartient pas à <em>Wisk</em>. C’est un projet indépendant.</p>
         </div>
       </div>
     </section>
 
+    <!-- COURSE DE FORMULE -->
+    <section id="course-formule-simulateur">
+      <h2>Course de Formule [Simulateur]</h2>
+      <div class="underline"></div>
+
+      <div class="section-container">
+        <div class="discord-widget">
+          <h3>Serveur Discord Officiel</h3>
+          <iframe
+            src="https://discord.com/widget?id=1427736251154567323&theme=dark"
+            width="350"
+            height="500"
+            allowtransparency="true"
+            frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+          </iframe>
+        </div>
+
+        <div class="description">
+          <h3>À propos de Course de Formule [Simulateur]</h3>
+          <p><strong>Course de Formule [Simulateur]</strong> est un jeu de <strong>F1</strong>, développé sur <strong>Roblox</strong> par une petite équipe de passionnés.</p>
+          <p>Le serveur Discord permet de discuter avec la communauté, proposer des idées, signaler des bugs et suivre les mises à jour.</p>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <small>&copy; <span id="year"></span> Wisk — Fait avec 💖</small><br>
@@ -313,9 +278,6 @@
       <a href="https://github.com/SplahsurYT/Wisk.github.io" target="_blank">Github</a>
     </footer>
   </div>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox"><img src="" alt="Project"></div>
 
   <script>
     // Theme toggle
@@ -343,19 +305,6 @@
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-
-    // Lightbox
-    const thumbs = document.querySelectorAll('.thumb');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-
-    thumbs.forEach(t=>{
-      t.addEventListener('click', ()=>{
-        lightbox.style.display='flex';
-        lightboxImg.src = t.dataset.img;
-      });
-    });
-    lightbox.addEventListener('click', ()=>{lightbox.style.display='none';});
 
     // Particles.js
     particlesJS('particles-js', {
