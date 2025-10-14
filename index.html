@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wisk — Création d'interfaces Roblox</title>
   <meta name="description" content="Wisk conçoit des interfaces Roblox modernes, fluides et optimisées pour vos jeux.">
+  <link rel="icon" href="Logo.png">
+
+  <!-- Open Graph pour Discord/Twitter -->
+  <meta property="og:title" content="Wisk — Création d'interfaces Roblox">
+  <meta property="og:description" content="Nous concevons des interfaces utilisateur immersives et modernes pour Roblox.">
+  <meta property="og:image" content="Logo.png">
+  <meta property="og:type" content="website">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -120,6 +127,7 @@
       box-shadow:0 8px 20px rgba(90,101,233,0.4);
       animation: pulse 2s infinite;
       transition:all .25s ease;
+      margin:6px;
     }
     .cta:hover{opacity:0.85; transform:scale(1.05);}
 
@@ -238,6 +246,7 @@
       header{flex-direction:column; align-items:flex-start;}
       nav{margin-top:12px;}
       .cta{width:100%; text-align:center;}
+      .hero{padding:40px 0;}
     }
 
     /* PARTICLES CONTAINER */
@@ -273,8 +282,7 @@
       <h1>Des interfaces Roblox uniques et professionnelles</h1>
       <p>Nous concevons des interfaces utilisateur immersives, modernes et parfaitement intégrées à vos projets Roblox.</p>
       <a href="#portfolio" class="cta">Découvrir notre travail</a>
-      <p> </p>
-      <a href=https://discord.gg/Hx8WXjaNCj" class="cta">Rejoint le Discord</a>
+      <a href="https://discord.gg/Hx8WXjaNCj" class="cta" target="_blank">Rejoins le Discord</a>
     </section>
 
     <section id="about">
@@ -303,7 +311,7 @@
       <h2>Notre Méthode</h2>
       <div class="underline"></div>
       <div class="method">
-        <h1><strong>PAS MIS EN PLACE</strong></h1>
+        <p style="text-align:center; color:var(--muted); font-weight:600;">🚧 Section en cours de construction</p>
         <p><strong>1. Discussion :</strong> nous échangeons avec vous pour comprendre vos besoins et votre style.</p>
         <p><strong>2. Conception :</strong> nous réalisons une maquette visuelle, validée avant intégration dans Roblox Studio.</p>
         <p><strong>3. Développement :</strong> chaque interface est codée et animée avec soin, pour un rendu fluide et réactif.</p>
@@ -319,16 +327,17 @@
         <div class="dev-card">
           <div class="dev-info">
             <h3>Site-28</h3>
-            <p>
-              Un projet Roblox inspiré de la Fondation SCP, développé par une petite équipe passionnée.
-              Découvrez les coulisses du développement et les dernières mises à jour.
-              
-              <strong>⚠️ Attention :</strong> Site-28 n’appartient pas à <em>Wisk</em>.  
-              C’est un projet indépendant créé par une équipe motivée, qui s’améliore de jour en jour grâce au soutien de sa communauté.
-              </p>
-            <a href="Port.html" target="_blank" rel="noopener" class="btn" aria-label="Voir le projet Site-28">
-              Voir plus →
-            </a>
+            <p>Un projet Roblox inspiré de la Fondation SCP, développé par une petite équipe passionnée.  
+            <strong>⚠️ Attention :</strong> Site-28 n’appartient pas à <em>Wisk</em>. C’est un projet indépendant créé par une équipe motivée.</p>
+            <a href="Port.html" target="_blank" rel="noopener" class="btn" aria-label="Voir le projet Site-28">Voir plus →</a>
+          </div>
+        </div>
+
+        <div class="dev-card">
+          <div class="dev-info">
+            <h3>Course de Formule [Simulateur]</h3>
+            <p>Un projet Roblox de F1 développé par deux devs. Le jeu est en évolution constante grâce au soutien de sa communauté.</p>
+            <a href="Port.html" target="_blank" rel="noopener" class="btn" aria-label="Voir le projet Course de Formule [Simulateur]">Voir plus →</a>
           </div>
         </div>
       </div>
@@ -370,12 +379,16 @@
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
+    // Agrandir le curseur sur hover
+    document.querySelectorAll('a, button').forEach(el=>{
+      el.addEventListener('mouseenter', ()=> cursor.style.transform='translate(-50%,-50%) scale(1.5)');
+      el.addEventListener('mouseleave', ()=> cursor.style.transform='translate(-50%,-50%) scale(1)');
+    });
 
     // Lightbox
     const thumbs = document.querySelectorAll('.thumb');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
-
     thumbs.forEach(t=>{
       t.addEventListener('click', ()=>{
         lightbox.style.display='flex';
